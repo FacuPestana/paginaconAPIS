@@ -5,8 +5,6 @@ let btn1 = document.getElementById('btn1');
 let btn2 = document.getElementById('btn2');
 let btn3 = document.getElementById('btn3');
 let fechaInput = document.getElementById('fechaInput');
-let btnIr = document.getElementById('btnIr');
-let fechaFoto = document.getElementById('fechaFoto');
 
 // Fecha actual
 let fechaActual = new Date();
@@ -31,15 +29,11 @@ function cargarFoto(fecha) {
                 img.style.display = "none";
             }
 
-            // Mostrar fecha, título y autor con saltos de línea y espacios
-           
-
+            // Mostrar fecha, título
             texto.innerText = 
                 `Fecha: ${datos.date}\n\n` +
-                `Título: ${datos.title}\n\n` +
-                `Autor: ${autor}`;
-
-            texto.style.textDecorationLine = 'underline';
+                `Título: ${datos.title}\n\n` 
+               
         })
         .catch(err => console.error("Error:", err));
 }
