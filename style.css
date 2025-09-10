@@ -40,5 +40,9 @@ button {
 #limite {
 color:#000000;
 display: flex;
-justify-content: center;
+justify-content: center;
+}
+
+#div2{
+    text-align: center;
 }

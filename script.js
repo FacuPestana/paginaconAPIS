@@ -1,22 +1,26 @@
-// Elementos del DOM
+console.log('Intentar con 12/08/2025 y 10/08/2025 (Altas Fotos)')
 let texto = document.getElementById('text');
 let img = document.getElementById('img');
 let btn1 = document.getElementById('btn1');
 let btn2 = document.getElementById('btn2');
 let btn3 = document.getElementById('btn3');
 let fechaInput = document.getElementById('fechaInput');
+let btnIr = document.getElementById('btnIr'); // faltaba este
+let url = document.getElementById('url');
 
-// Fecha actual
+// Fecha
+
 let fechaActual = new Date();
 
-// Limitar input a rango válido
 fechaInput.max = new Date().toISOString().split("T")[0];
-fechaInput.min = "1995-06-16";
+fechaInput.min = "1995-06-20";
 
-// Función para cargar solo imagen por fecha
 function cargarFoto(fecha) {
-    let fechaStr = fecha.toISOString().split('T')[0]; // YYYY-MM-DD
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=siMvzuSP0NkMW22QSs2zlgo1wlXs1FDOb6ZVOzkp&date=${fechaStr}`)
+    let fechaStr = fecha.toISOString().split('T')[0];
+    let apiKey = "siMvzuSP0NkMW22QSs2zlgo1wlXs1FDOb6ZVOzkp";
+    let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fechaStr}`;
+
+    fetch(url)
         .then(res => res.json())
         .then(datos => {
             console.log(datos.url, datos.date);
@@ -29,11 +33,9 @@ function cargarFoto(fecha) {
                 img.style.display = "none";
             }
 
-            // Mostrar fecha, título
-            texto.innerText = 
+            texto.innerText =
                 `Fecha: ${datos.date}\n\n` +
-                `Título: ${datos.title}\n\n` 
-               
+                `Título: ${datos.title}\n\n`;
         })
         .catch(err => console.error("Error:", err));
 }
@@ -57,11 +59,12 @@ btn3.addEventListener('click', () => {
 btnIr.addEventListener('click', () => {
     if (fechaInput.value) {
         fechaActual = new Date(fechaInput.value);
+        console.log(fechaInput);
         cargarFoto(fechaActual);
     } else {
         alert("Selecciona una fecha primero.");
     }
 });
 
-// Carga inicial (foto de hoy)
-cargarFoto(fechaActual);
+// Primera carga
+cargarFoto(fechaActual)
