@@ -22,11 +22,12 @@ button {
     color: white;
     border: none;
     padding: 10px 20px;
-    text-align: center;
+    align-items: center;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px;
+    gap: 15px;
 }
 
 #text {
@@ -45,4 +46,12 @@ justify-content: center;
 
 #div2{
     text-align: center;
+}
+
+#img {
+  display: block;        /* lo convierte en bloque */
+  margin: 20px auto;     /* auto en los lados = centrado */
+  max-width: 90%;        /* que no se desborde */
+  height: auto;          /* mantiene proporción */
+  border-radius: 15px;   /* opcional, queda más prolijo */
 }

@@ -1,4 +1,4 @@
-console.log('Intentar con 12/08/2025 y 10/08/2025 (Altas Fotos)')
+console.log('Intentar con 12/08/2025, 10/08/2025, 29/01/2020 (Altas Fotos), TOMA LA FECHA DE USA')
 let texto = document.getElementById('text');
 let img = document.getElementById('img');
 let btn1 = document.getElementById('btn1');
@@ -7,7 +7,8 @@ let btn3 = document.getElementById('btn3');
 let fechaInput = document.getElementById('fechaInput');
 let btnIr = document.getElementById('btnIr'); // faltaba este
 let url = document.getElementById('url');
-
+let btnSuerte = document.getElementById('btnSuerte');
+let deco = document.getElementById('deco');
 // Fecha
 
 let fechaActual = new Date();
@@ -19,7 +20,7 @@ function cargarFoto(fecha) {
     let fechaStr = fecha.toISOString().split('T')[0];
     let apiKey = "siMvzuSP0NkMW22QSs2zlgo1wlXs1FDOb6ZVOzkp";
     let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fechaStr}`;
-
+    deco.innerText = ' ';
     fetch(url)
         .then(res => res.json())
         .then(datos => {
@@ -39,6 +40,7 @@ function cargarFoto(fecha) {
         })
         .catch(err => console.error("Error:", err));
 }
+
 
 // Botones
 btn1.addEventListener('click', () => {
@@ -66,5 +68,27 @@ btnIr.addEventListener('click', () => {
     }
 });
 
-// Primera carga
-cargarFoto(fechaActual)
+
+
+btnSuerte.addEventListener('click', () => {
+    // Fecha mínima (primer APOD)
+    let minDate = new Date("1995-06-20");
+    // Fecha máxima (hoy)
+    let maxDate = new Date();
+
+    // Diferencia en milisegundos
+    let diff = maxDate.getTime() - minDate.getTime();
+
+    // Número aleatorio dentro del rango
+    let randomTime = minDate.getTime() + Math.random() * diff;
+
+    // Crear fecha aleatoria
+    fechaActual = new Date(randomTime);
+
+    // Cargar foto de esa fecha
+    cargarFoto(fechaActual);
+});
+
+btn1,btn2,btn3,btnIr,btnSuerte.addEventListener('click'), () => {
+    deco.innerText =' ';
+}
