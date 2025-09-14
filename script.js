@@ -11,14 +11,20 @@ let btnSuerte = document.getElementById('btnSuerte');
 let deco = document.getElementById('deco');
 let video = document.getElementById('video'); // iframe para videos
 
-// Fecha
+// Fecha actual
 let fechaActual = new Date();
-
 fechaInput.max = new Date().toISOString().split("T")[0];
 fechaInput.min = "1995-06-20";
 
-// Función principal
+// Función para mostrar mensaje mientras carga
+function mostrarCargando() {
+    deco.innerText = 'cargando...';
+}
+
+// Función principal para cargar foto/video
 function cargarFoto(fecha) {
+    mostrarCargando();
+
     let fechaStr = fecha.toISOString().split('T')[0];
     let apiKey = "siMvzuSP0NkMW22QSs2zlgo1wlXs1FDOb6ZVOzkp";
     let url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fechaStr}`;
@@ -38,19 +44,21 @@ function cargarFoto(fecha) {
                 img.style.display = "none";
             }
 
-            texto.innerText =
-                `Fecha: ${datos.date}\n\n` +
-                `Título: ${datos.title}\n\n`;
+            texto.innerText = `Fecha: ${datos.date}\n\nTítulo: ${datos.title}\n\n`;
+            deco.innerText = ''; // limpia mensaje al cargar
         })
-        .catch(err => console.error("Error:", err));
+        .catch(err => {
+            console.error("Error:", err);
+            deco.innerText = 'Error cargando la foto/video.';
+        });
 }
 
-// Función para limpiar "esperando petición*"
+// Función para limpiar deco al hacer click
 function limpiarDeco() {
-    deco.innerText = ' ';
+    deco.innerText = '';
 }
 
-// Botones navegación
+// Asignar eventos a botones si existen
 if (btn1) btn1.addEventListener('click', () => {
     limpiarDeco();
     fechaActual.setDate(fechaActual.getDate() - 1);
@@ -85,10 +93,9 @@ if (btnSuerte) btnSuerte.addEventListener('click', () => {
     let maxDate = new Date();
     let diff = maxDate.getTime() - minDate.getTime();
     let randomTime = minDate.getTime() + Math.random() * diff;
-
     fechaActual = new Date(randomTime);
     cargarFoto(fechaActual);
 });
 
-// Primera carga (solo mensaje esperando petición)
+// Inicial: mensaje esperando hasta que el usuario haga click
 deco.innerText = 'esperando petición*';
