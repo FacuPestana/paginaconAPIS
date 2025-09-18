@@ -45,7 +45,7 @@ function cargarFoto(fecha) {
             }
 
             texto.innerText = `Fecha: ${datos.date}\n\nTítulo: ${datos.title}\n\n`;
-            deco.innerText = ''; // limpia mensaje al cargar
+            deco.innerText = ''; 
         })
         .catch(err => {
             console.error("Error:", err);
@@ -53,12 +53,11 @@ function cargarFoto(fecha) {
         });
 }
 
-// Función para limpiar deco al hacer click
+
 function limpiarDeco() {
     deco.innerText = '';
 }
 
-// Asignar eventos a botones si existen
 if (btn1) btn1.addEventListener('click', () => {
     limpiarDeco();
     fechaActual.setDate(fechaActual.getDate() - 1);
@@ -87,15 +86,18 @@ if (btnIr) btnIr.addEventListener('click', () => {
     }
 });
 
-if (btnSuerte) btnSuerte.addEventListener('click', () => {
-    limpiarDeco();
-    let minDate = new Date("1995-06-20");
-    let maxDate = new Date();
-    let diff = maxDate.getTime() - minDate.getTime();
-    let randomTime = minDate.getTime() + Math.random() * diff;
-    fechaActual = new Date(randomTime);
-    cargarFoto(fechaActual);
-});
+    if (btnSuerte) btnSuerte.addEventListener('click', () => {
+        limpiarDeco();
+        let minDate = new Date("1995-06-20");
+        let maxDate = new Date();
+        let diff = maxDate.getTime() - minDate.getTime();
+        let randomTime = minDate.getTime() + Math.random() * diff;
+        fechaActual = new Date(randomTime);
+        cargarFoto(fechaActual);
+    });
 
-// Inicial: mensaje esperando hasta que el usuario haga click
 deco.innerText = 'esperando petición*';
+
+flatpickr("#datepicker", {
+    dateFormat: "d/m/Y"
+  });

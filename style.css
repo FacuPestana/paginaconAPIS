@@ -32,9 +32,7 @@ button {
 
 #text {
     white-space: pre-line;
-    /* Permite saltos de línea */
     text-align: center;
-    /* Centra el texto */
     font-size: 20px;
 }
 
@@ -49,11 +47,11 @@ justify-content: center;
 }
 
 #img {
-  display: block;        /* lo convierte en bloque */
-  margin: 20px auto;     /* auto en los lados = centrado */
-  max-width: 90%;        /* que no se desborde */
-  height: auto;          /* mantiene proporción */
-  border-radius: 15px;   /* opcional, queda más prolijo */
+  display: block;       
+  margin: 20px auto;    
+  max-width: 90%;       
+  height: auto;         
+  border-radius: 15px;   
 }
 
 #botones{
@@ -65,7 +63,17 @@ justify-content: center;
 }
 
 button:hover {
-    transform: scale(1.1);
-    background-color: #0066ff;
+    transform: scale(1.05);
+    background-color: #00ccff;
     transition: 0.3s;
+}
+
+#title:hover {
+    text-decoration: underline;
+    transition: 1s;
+}   
+
+::selection{
+    background-color:#02386e;
+    color: #fff;
 }
